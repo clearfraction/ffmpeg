@@ -16,12 +16,12 @@ Source0:	    https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
-BuildRequires:  faac-dev
+BuildRequires:  fdk-aac-dev
 BuildRequires:  fontconfig-dev
 BuildRequires:  freetype-dev
 BuildRequires:  gnutls-dev
 BuildRequires:  gsm-dev
-BuildRequires:  lame-dev
+BuildRequires:  libmp3lame-dev
 BuildRequires:  jack2-dev
 BuildRequires:  ladspa_sdk-dev
 BuildRequires:  libass-dev
