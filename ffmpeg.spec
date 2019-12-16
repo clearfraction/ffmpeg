@@ -108,62 +108,62 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 
 
-./configure \\\
-    --prefix=%{_prefix} \\\
-    --bindir=%{_bindir} \\\
-    --datadir=%{_datadir}/%{name} \\\
-    --docdir=%{_docdir}/%{name} \\\
-    --incdir=%{_includedir}/%{name} \\\
-    --libdir=%{_libdir} \\\
-    --mandir=%{_mandir} \\\
-    --arch=%{_target_cpu} \\\
-    --optflags="%{optflags}" \\\
-    --extra-ldflags="%{?__global_ldflags}" \\\
-    --enable-bzlib \\\
-    --enable-libdrm \\\
-    --enable-fontconfig \\\
-    --enable-gcrypt \\\
+./configure \
+    --prefix=%{_prefix} \
+    --bindir=%{_bindir} \
+    --datadir=%{_datadir}/%{name} \
+    --docdir=%{_docdir}/%{name} \
+    --incdir=%{_includedir}/%{name} \
+    --libdir=%{_libdir} \
+    --mandir=%{_mandir} \
+    --arch=%{_target_cpu} \
+    --optflags="%{optflags}" \
+    --extra-ldflags="%{?__global_ldflags}" \
+    --enable-bzlib \
+    --enable-libdrm \
+    --enable-fontconfig \
+    --enable-gcrypt \
    --enable-gmp --enable-version3}
-    --enable-gnutls \\\
-    --enable-ladspa \\\
-    --enable-libass \\\
-    --enable-libcdio \\\
-    --enable-libfaac --enable-nonfree \\\
-    --enable-libjack \\\
-    --enable-libfreetype \\\
-    --enable-libfribidi \\\
-    --enable-libgsm \\\
-    --enable-libmp3lame \\\
-    --enable-netcdf \\\
-    --enable-opencl \\\
-    --enable-libopencv} \\\
-    --enable-libvidstab \\\
-    --enable-libvmaf --enable-version3 \\\
-    --enable-libaom \\\
-    --enable-opengl \\\
-    --enable-libopenjpeg \\\
-    --enable-libopus \\\
-    --enable-libpulse \\\
-    --enable-libsnappy \\\
-    --enable-libspeex \\\
-    --enable-libvorbis \\\
-    --enable-libv4l2 \\\
-    --enable-libvpx \\\
-    --enable-libwebp \\\
-    --enable-libx264 \\\
-    --enable-libx265} \\\
-    --enable-avfilter \\\
-    --enable-avresample \\\
-    --enable-postproc \\\
-    --enable-pthreads \\\
-    --disable-static \\\
-    --enable-shared \\\
-    --enable-gpl \\\
-    --disable-debug \\\
-    --disable-stripping \\\
-    --shlibdir=%{_libdir} \\\
-    --cpu=%{_target_cpu} \\\
-    --enable-runtime-cpudetect \\\
+    --enable-gnutls \
+    --enable-ladspa \
+    --enable-libass \
+    --enable-libcdio \
+    --enable-libfaac --enable-nonfree \
+    --enable-libjack \
+    --enable-libfreetype \
+    --enable-libfribidi \
+    --enable-libgsm \
+    --enable-libmp3lame \
+    --enable-netcdf \
+    --enable-opencl \
+    --enable-libopencv} \
+    --enable-libvidstab \
+    --enable-libvmaf --enable-version3 \
+    --enable-libaom \
+    --enable-opengl \
+    --enable-libopenjpeg \
+    --enable-libopus \
+    --enable-libpulse \
+    --enable-libsnappy \
+    --enable-libspeex \
+    --enable-libvorbis \
+    --enable-libv4l2 \
+    --enable-libvpx \
+    --enable-libwebp \
+    --enable-libx264 \
+    --enable-libx265} \
+    --enable-avfilter \
+    --enable-avresample \
+    --enable-postproc \
+    --enable-pthreads \
+    --disable-static \
+    --enable-shared \
+    --enable-gpl \
+    --disable-debug \
+    --disable-stripping \
+    --shlibdir=%{_libdir} \
+    --cpu=%{_target_cpu} \
+    --enable-runtime-cpudetect \
     --enable-libfdk-aac --enable-nonfree 
 
 
