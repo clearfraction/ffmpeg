@@ -155,7 +155,6 @@ This package contains development files for %{name}
 
 %prep
 %setup -n %{name}-%{shortcommit0} 
-%patch0 -p1
 
 # fix -O3 -g in host_cflags
 sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
