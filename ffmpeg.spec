@@ -95,7 +95,19 @@ VCR. It can encode in real time in many formats including MPEG1 audio
 and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 This package contains development files for %{name}
 
-%global ff_configure \
+%prep
+%setup -n %{name}-%{shortcommit0} 
+
+# fix -O3 -g in host_cflags
+sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
+mkdir -p _doc/examples
+cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
+
+%build
+
+export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
+
+
 ./configure \\\
     --prefix=%{_prefix} \\\
     --bindir=%{_bindir} \\\
@@ -111,7 +123,7 @@ This package contains development files for %{name}
     --enable-libdrm \\\
     --enable-fontconfig \\\
     --enable-gcrypt \\\
-    %{?_with_gmp:--enable-gmp --enable-version3} \\\
+   --enable-gmp --enable-version3}
     --enable-gnutls \\\
     --enable-ladspa \\\
     --enable-libass \\\
@@ -148,22 +160,13 @@ This package contains development files for %{name}
     --enable-shared \\\
     --enable-gpl \\\
     --disable-debug \\\
-    --disable-stripping 
+    --disable-stripping \\\
+    --shlibdir=%{_libdir} \\\
+    --cpu=%{_target_cpu} \\\
+    --enable-runtime-cpudetect \\\
+    --enable-libfdk-aac --enable-nonfree 
 
 
-
-
-%prep
-%setup -n %{name}-%{shortcommit0} 
-
-# fix -O3 -g in host_cflags
-sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
-mkdir -p _doc/examples
-cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
-
-%build
-
-export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %make_build V=0
 make documentation V=0
 make alltools V=0
