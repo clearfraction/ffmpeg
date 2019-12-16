@@ -27,7 +27,7 @@ BuildRequires:  ladspa_sdk-dev
 BuildRequires:  libass-dev
 BuildRequires:  libcdio-dev
 BuildRequires:  libgcrypt-devel
-BuildRequires:  libGL-dev
+BuildRequires:  mesa-dev
 BuildRequires:  libmodplug-dev
 BuildRequires:  v4l-utils-dev
 BuildRequires:  libvorbis-dev
