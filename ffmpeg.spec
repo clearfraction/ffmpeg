@@ -123,7 +123,7 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-libdrm \
     --enable-fontconfig \
     --enable-gcrypt \
-   --enable-gmp --enable-version3}
+   --enable-gmp --enable-version3
     --enable-gnutls \
     --enable-ladspa \
     --enable-libass \
