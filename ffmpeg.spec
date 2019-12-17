@@ -151,7 +151,7 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-libvpx \
     --enable-libwebp \
     --enable-libx264 \
-    --enable-libx265} \
+    --enable-libx265 \
     --enable-avfilter \
     --enable-avresample \
     --enable-postproc \
