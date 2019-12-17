@@ -1,4 +1,4 @@
-
+%define abi_package %{nil}
 %global commit0 1529dfb73a5157dcb8762051ec4c8d8341762478
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
@@ -178,10 +178,11 @@ rm -r %{buildroot}%{_datadir}/%{name}/examples
 %{_bindir}/ffmpeg
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
+%{_datadir}/%{name}
+%{_mandir}/man3/*.3*
 %{_mandir}/man1/ffmpeg*.1*
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
-%{_datadir}/%{name}
 
 %files libs
 %{_libdir}/lib*.so.*
@@ -199,6 +200,8 @@ rm -r %{buildroot}%{_datadir}/%{name}/examples
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
+
+
 
 %changelog
 # based on https://github.com/UnitedRPMs/ffmpeg
