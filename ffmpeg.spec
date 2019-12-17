@@ -16,7 +16,7 @@ Source0:	    https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
-#                       BuildRequires:  fdk-aac-dev
+BuildRequires:  fdk-aac-free-dev
 BuildRequires:  fontconfig-dev
 BuildRequires:  freetype-dev
 BuildRequires:  gnutls-dev
