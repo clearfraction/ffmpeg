@@ -162,9 +162,7 @@ make alltools V=0
 %install
 %make_install V=0
 rm -r %{buildroot}%{_datadir}/%{name}/examples
-%if 0%{!?ffmpegsuffix:1}
-install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
-%endif
+
 
 %post libs -p /sbin/ldconfig
 
@@ -174,23 +172,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 %postun -n libavdevice -p /sbin/ldconfig
 
-%if 0%{!?ffmpegsuffix:1}
-%files
-%doc COPYING.* CREDITS README.md 
-%{_bindir}/ffmpeg
-%{_bindir}/ffplay
-%{_bindir}/ffprobe
-%{_bindir}/qt-faststart
-%{_mandir}/man1/ffmpeg*.1*
-%{_mandir}/man1/ffplay*.1*
-%{_mandir}/man1/ffprobe*.1*
-%{_datadir}/%{name}
-%endif
 
 %files libs
 %{_libdir}/lib*.so.*
 %exclude %{_libdir}/libavdevice.so.*
-%{_mandir}/man3/lib*.3.gz
 %exclude %{_mandir}/man3/libavdevice.3*
 
 %files -n libavdevice
