@@ -25,7 +25,6 @@ BuildRequires:  libmp3lame-dev
 BuildRequires:  jack2-dev
 BuildRequires:  ladspa_sdk-dev
 BuildRequires:  libass-dev
-BuildRequires:  libcdio-dev
 BuildRequires:  libgcrypt-devel
 BuildRequires:  mesa-dev
 BuildRequires:  libmodplug-dev
@@ -124,7 +123,6 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-gnutls \
     --enable-ladspa \
     --enable-libass \
-    --enable-libcdio \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libjack \
     --enable-libfreetype \
