@@ -178,7 +178,6 @@ rm -r %{buildroot}%{_datadir}/%{name}/examples
 %{_bindir}/ffmpeg
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
-%{_bindir}/qt-faststart
 %{_mandir}/man1/ffmpeg*.1*
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
