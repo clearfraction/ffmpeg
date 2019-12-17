@@ -38,7 +38,6 @@ BuildRequires:  libva-dev
 BuildRequires:  yasm
 BuildRequires:  libwebp-dev
 BuildRequires:  opencl-headers-dev
-BuildRequires:  opencv-devel
 BuildRequires:  libjpeg-turbo-dev
 BuildRequires:  opus-dev
 BuildRequires:  pulseaudio-dev
@@ -134,9 +133,6 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-libgsm \
     --enable-libmp3lame \
     --enable-opencl \
-    --enable-libopencv \
-    --enable-libvidstab \
-    --enable-libvmaf --enable-version3 \
     --enable-opengl \
     --enable-libopenjpeg \
     --enable-libopus \
