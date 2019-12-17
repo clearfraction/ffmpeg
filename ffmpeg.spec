@@ -37,7 +37,6 @@ BuildRequires:  libXvMC-dev
 BuildRequires:  libva-dev
 BuildRequires:  yasm
 BuildRequires:  libwebp-dev
-BuildRequires:  netcdf-dev
 BuildRequires:  opencl-headers-dev
 BuildRequires:  opencv-devel
 BuildRequires:  libjpeg-turbo-dev
@@ -128,18 +127,16 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-ladspa \
     --enable-libass \
     --enable-libcdio \
-    --enable-libfaac --enable-nonfree \
+    --enable-libfdk-aac --enable-nonfree \
     --enable-libjack \
     --enable-libfreetype \
     --enable-libfribidi \
     --enable-libgsm \
     --enable-libmp3lame \
-    --enable-netcdf \
     --enable-opencl \
     --enable-libopencv \
     --enable-libvidstab \
     --enable-libvmaf --enable-version3 \
-    --enable-libaom \
     --enable-opengl \
     --enable-libopenjpeg \
     --enable-libopus \
