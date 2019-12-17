@@ -134,7 +134,6 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-libmp3lame \
     --enable-opencl \
     --enable-opengl \
-    --enable-libopenjpeg \
     --enable-libopus \
     --enable-libpulse \
     --enable-libsnappy \
