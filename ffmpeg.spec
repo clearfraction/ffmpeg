@@ -16,7 +16,7 @@ Source0:	    https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
-BuildRequires:  fdk-aac-dev
+#                       BuildRequires:  fdk-aac-dev
 BuildRequires:  fontconfig-dev
 BuildRequires:  freetype-dev
 BuildRequires:  gnutls-dev
@@ -37,7 +37,6 @@ BuildRequires:  libXvMC-dev
 BuildRequires:  libva-dev
 BuildRequires:  yasm
 BuildRequires:  libwebp-dev
-BuildRequires:  opencl-headers-dev
 BuildRequires:  libjpeg-turbo-dev
 BuildRequires:  opus-dev
 BuildRequires:  pulseaudio-dev
@@ -132,7 +131,6 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-libfribidi \
     --enable-libgsm \
     --enable-libmp3lame \
-    --enable-opencl \
     --enable-opengl \
     --enable-libopus \
     --enable-libpulse \
