@@ -51,6 +51,9 @@ BuildRequires:  x265-dev
 BuildRequires:  zlib-dev
 BuildRequires:	libdrm-dev
 BuildRequires:	alsa-lib-dev
+BuildRequires:  rtmpdump-dev
+BuildRequires : pkgconfig(libmfx)
+
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -144,6 +147,8 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
     --enable-avresample \
     --enable-postproc \
     --enable-pthreads \
+    --enable-librtmp \
+    --enable-libmfx \
     --disable-static \
     --enable-shared \
     --enable-gpl \
