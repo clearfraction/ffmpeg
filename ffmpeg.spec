@@ -84,8 +84,7 @@ devices, audio capture and playback etc.
 Summary:        Development package for %{name}
 Requires:       %{name}-libs%{_isa} = %{version}-%{release}
 Requires:       libavdevice%{_isa} = %{version}-%{release}
-Requires:       pkgconfig
-Requires:       libxcb
+Requires:       pkg-config
 
 %description    dev
 FFmpeg is a complete and free Internet live audio and video
