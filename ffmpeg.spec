@@ -52,7 +52,7 @@ BuildRequires:  zlib-dev
 BuildRequires:	libdrm-dev
 BuildRequires:	alsa-lib-dev
 BuildRequires:  rtmpdump-dev
-BuildRequires : pkgconfig(libmfx)
+BuildRequires:  pkgconfig(libmfx)
 
 
 %description
