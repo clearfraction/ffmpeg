@@ -3,7 +3,6 @@
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
-
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.1
