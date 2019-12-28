@@ -107,10 +107,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
 export SOURCE_DATE_EPOCH=1563233323
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+#export CFLAGS="$CFLAGS -fno-lto "
+#export FCFLAGS="$CFLAGS -fno-lto "
+#export FFLAGS="$CFLAGS -fno-lto "
+#export CXXFLAGS="$CXXFLAGS -fno-lto "
 
 ./configure \
     --prefix=%{_prefix} \
@@ -123,6 +123,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
     --arch=%{_target_cpu} \
     --optflags="%{optflags}" \
     --extra-ldflags="%{?__global_ldflags}" \
+    --enable-lto \
     --enable-bzlib \
     --enable-libdrm \
     --enable-fontconfig \
