@@ -105,12 +105,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563233323
+export SOURCE_DATE_EPOCH=1571938166
 export GCC_IGNORE_WERROR=1
-#export CFLAGS="$CFLAGS -fno-lto "
-#export FCFLAGS="$CFLAGS -fno-lto "
-#export FFLAGS="$CFLAGS -fno-lto "
-#export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 
 ./configure \
     --prefix=%{_prefix} \
@@ -121,9 +121,8 @@ export GCC_IGNORE_WERROR=1
     --libdir=%{_libdir} \
     --mandir=%{_mandir} \
     --arch=%{_target_cpu} \
-    --optflags="%{optflags}" \
-    --extra-ldflags="%{?__global_ldflags}" \
-    --enable-lto \
+    --extra-ldflags='-ldl' \
+    --enable-vaapi \
     --enable-bzlib \
     --enable-libdrm \
     --enable-fontconfig \
@@ -161,9 +160,12 @@ export GCC_IGNORE_WERROR=1
     --disable-debug \
     --disable-stripping \
     --shlibdir=%{_libdir} \
-    --cpu=%{_target_cpu} \
-    --enable-runtime-cpudetect \
     --enable-libfdk-aac --enable-nonfree 
+
+#   --optflags="%%{optflags}" \
+#   --cpu=%{_target_cpu} \
+#   --enable-runtime-cpudetect \
+
 
 
 %make_build V=0
@@ -172,7 +174,7 @@ make alltools V=0
 
 %install
 %make_install V=0
-rm -r %{buildroot}%{_datadir}/%{name}/examples
+rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 
 %post libs -p /sbin/ldconfig
@@ -216,3 +218,4 @@ rm -r %{buildroot}%{_datadir}/%{name}/examples
 
 %changelog
 # based on https://github.com/UnitedRPMs/ffmpeg
+# and https://github.com/clearlinux-pkgs/not-ffmpeg
