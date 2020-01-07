@@ -59,11 +59,11 @@ BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 
 # Requires
-Requires: x264-libs
-Requires: x265-libs
-Requires: fdk-aac-free
-Requires: libmp3lame0
-
+Requires: x264-libs >= 0.157
+Requires: x265-libs >= 3.2.1
+Requires: libmp3lame0 >= 3.100
+Requires: ffmpeg-libs = %{version}-%{release}
+Requires: libavdevice = %{version}-%{release}
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -73,7 +73,7 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 
 %package        libs
 Summary:        Libraries for %{name}
-Recommends:	fdk-aac-free
+Recommends:	fdk-aac-free >= 2.0.0
 
 %description    libs
 FFmpeg is a complete and free Internet live audio and video
@@ -190,7 +190,7 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 # Install profile and ld.so.config files
 install -Dm755 %{S:1} "%{buildroot}/etc/profile.d/ffmpeg.sh"
-install -Dm644 %{S:2} "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
+install -Dm755 %{S:2} "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
 
 
 %post libs -p /sbin/ldconfig
