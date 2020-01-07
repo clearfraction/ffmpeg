@@ -1,4 +1,7 @@
 %define abi_package %{nil}
+# We need test and avoid conflicts in bundle packages in CL
+AutoReqProv: no
+
 %global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
@@ -9,7 +12,9 @@ Version:        4.2.2
 Release:        7%{?dist}
 License:        GPLv2+
 URL:            http://ffmpeg.org/
-Source0:	    https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1:	ffmpeg.sh
+Source2:	ffmpeg.conf
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -52,6 +57,12 @@ BuildRequires:	libdrm-dev
 BuildRequires:	alsa-lib-dev
 BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
+
+# Requires
+Requires: x264-libs
+Requires: x265-libs
+Requires: fdk-aac-free
+Requires: libmp3lame0
 
 
 %description
@@ -114,12 +125,13 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 
 ./configure \
     --prefix=%{_prefix} \
-    --bindir=%{_bindir} \
+    --bindir=%{_bindir}/%{name} \
     --datadir=%{_datadir}/%{name} \
     --docdir=%{_docdir}/%{name} \
     --incdir=%{_includedir}/%{name} \
-    --libdir=%{_libdir} \
+    --libdir=%{_libdir}/%{name} \
     --mandir=%{_mandir} \
+    --pkgconfigdir=%{_datadir}/pkgconfig \
     --arch=%{_target_cpu} \
     --extra-ldflags='-ldl' \
     --enable-vaapi \
@@ -176,6 +188,10 @@ make alltools V=0
 %make_install V=0
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
+# Install profile and ld.so.config files
+install -Dm755 %{S:1} "%{buildroot}/etc/profile.d/ffmpeg.sh"
+install -Dm644 %{S:2} "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
+
 
 %post libs -p /sbin/ldconfig
 
@@ -188,19 +204,20 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 %files
 %doc COPYING.* CREDITS README.md 
-%{_bindir}/ffmpeg
-%{_bindir}/ffplay
-%{_bindir}/ffprobe
+%{_bindir}/%{name}/ffmpeg
+%{_bindir}/%{name}/ffplay
+%{_bindir}/%{name}/ffprobe
 %{_datadir}/%{name}
 %{_mandir}/man3/*.3*
 %{_mandir}/man1/ffmpeg*.1*
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
+/etc/profile.d/ffmpeg.sh
 
 %files libs
-%{_libdir}/lib*.so.*
+%{_libdir}/%{name}/lib*.so.*
 %exclude %{_libdir}/libavdevice.so.*
-%exclude %{_mandir}/man3/libavdevice.3*
+/etc/ld.so.conf.d/ffmpeg.conf
 
 %files -n libavdevice
 %{_libdir}/libavdevice.so.*
@@ -211,8 +228,8 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 %doc _doc/examples
 %doc %{_docdir}/%{name}/*.html
 %{_includedir}/%{name}
-%{_libdir}/pkgconfig/lib*.pc
-%{_libdir}/lib*.so
+%{_datadir}/pkgconfig/lib*.pc
+%{_libdir}/%{name}/lib*.so
 
 
 
