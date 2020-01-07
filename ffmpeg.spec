@@ -183,14 +183,15 @@ make documentation V=0
 make alltools V=0
 
 %install
-%make_install V=0
-rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 # Install profile and ld.so.config files
 mkdir -p %{buildroot}/etc/profile.d/
 mkdir -p %{buildroot}/etc/ld.so.conf.d/
 echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "%{buildroot}/etc/profile.d/ffmpeg.sh"
 echo '/usr/lib64/ffmpeg/' > "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
+
+%make_install V=0
+rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 
 %post libs -p /sbin/ldconfig
