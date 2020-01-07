@@ -191,8 +191,8 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 # Install profile and ld.so.config files
 mkdir -p %{buildroot}/etc/profile.d/
 mkdir -p %{buildroot}/etc/ld.so.conf.d/
-install -Dm755 %{S:1} "%{buildroot}/etc/profile.d/ffmpeg.sh"
-install -Dm755 %{S:2} "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
+install -Dm755 %{Source1} "%{buildroot}/etc/profile.d/ffmpeg.sh"
+install -Dm755 %{Source2} "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
 
 
 %post libs -p /sbin/ldconfig
