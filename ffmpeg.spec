@@ -13,8 +13,6 @@ Release:        7%{?dist}
 License:        GPLv2+
 URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:	ffmpeg.sh
-Source2:	ffmpeg.conf
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -191,8 +189,8 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 # Install profile and ld.so.config files
 mkdir -p %{buildroot}/etc/profile.d/
 mkdir -p %{buildroot}/etc/ld.so.conf.d/
-cp -f %{S:1} "%{buildroot}/etc/profile.d/"
-cp -f %{S:2} "%{buildroot}/etc/ld.so.conf.d/"
+echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "%{buildroot}/etc/profile.d/ffmpeg.sh"
+echo '/usr/lib64/ffmpeg/' > "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
 
 
 %post libs -p /sbin/ldconfig
