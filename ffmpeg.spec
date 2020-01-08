@@ -2,8 +2,8 @@
 # We need test and avoid conflicts in bundle packages in CL
 AutoReqProv: no
 
-# Macros; Why isn't detected buildroot macro?
-%global _topdir $PWD/rpmbuild
+# Macros; Why isn't detected buildroot macro? /usr/lib/rpm/macros
+%global _topdir %{getenv:HOME}/rpmbuild
 %global _sourcedir %{_topdir}/SOURCES
 %global _buildrootdir %{_topdir}/BUILDROOT
 %global buildroot %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
