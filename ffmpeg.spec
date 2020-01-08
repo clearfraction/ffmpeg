@@ -218,12 +218,12 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 %{_mandir}/man1/ffmpeg*.1*
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
-/etc/profile.d/ffmpeg.sh
+#/etc/profile.d/ffmpeg.sh
 
 %files libs
 %{_libdir}/%{name}/lib*.so.*
 %exclude %{_libdir}/libavdevice.so.*
-/etc/ld.so.conf.d/ffmpeg.conf
+#/etc/ld.so.conf.d/ffmpeg.conf
 
 %files -n libavdevice
 %{_libdir}/libavdevice.so.*
