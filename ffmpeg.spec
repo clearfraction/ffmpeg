@@ -2,12 +2,6 @@
 # We need test and avoid conflicts in bundle packages in CL
 AutoReqProv: no
 
-# Macros; Why isn't detected buildroot macro? /usr/lib/rpm/macros
-%global _topdir %{getenv:HOME}/rpmbuild
-%global _sourcedir %{_topdir}/SOURCES
-%global _buildrootdir %{_topdir}/BUILDROOT
-%global buildroot %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
-
 %global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
