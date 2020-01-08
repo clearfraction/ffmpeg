@@ -9,7 +9,7 @@ install: true
 
 # the build scripts
 script:
-- docker run --privileged=true --cap-add=SYS_ADMIN -v $(pwd):/home --security-opt seccomp:unconfined clearlinux:latest /bin/sh -c "swupd bundle-add curl && curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/test_build.sh && chmod +x test_build.sh && cd /home && ./test_build.sh"   
+- docker run --privileged=true --cap-add=SYS_ADMIN -v $(pwd):/home --security-opt seccomp:unconfined clearlinux:latest /bin/sh -c "swupd bundle-add curl && cd /home && curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/test_build.sh && chmod +x test_build.sh && ./test_build.sh"   
 
 notifications:
 slack: unitedrpms:lzDykHTpajKrgmGz9NkrO1Hj
