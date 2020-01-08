@@ -2,6 +2,12 @@
 # We need test and avoid conflicts in bundle packages in CL
 AutoReqProv: no
 
+# Macros; Why isn't detected buildroot macro?
+%global _topdir $HOME/rpmbuild
+%global _sourcedir %{_topdir}/SOURCES
+%global _buildrootdir %{_topdir}/BUILDROOT
+%global buildroot %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
+
 %global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
@@ -9,7 +15,7 @@ AutoReqProv: no
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        7%{?dist}
+Release:        7
 License:        GPLv2+
 URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -185,10 +191,15 @@ make alltools V=0
 %install
 
 # Install profile and ld.so.config files
-mkdir -p %{buildroot}etc/profile.d/
-mkdir -p %{buildroot}etc/ld.so.conf.d/
-echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "%{buildroot}etc/profile.d/ffmpeg.sh"
-echo '/usr/lib64/ffmpeg/' > "%{buildroot}etc/ld.so.conf.d/ffmpeg.conf"
+mkdir -p %{buildroot}/etc/profile.d/
+mkdir -p %{buildroot}/etc/ld.so.conf.d/
+echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "%{buildroot}/etc/profile.d/ffmpeg.sh"
+echo '/usr/lib64/ffmpeg/' > "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
+
+if [ ! -f %{buildroot}/etc/profile.d/ffmpeg.sh ]; then
+echo "macro buildroot missed, current path $PWD"
+exit 1
+fi
 
 %make_install V=0
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
