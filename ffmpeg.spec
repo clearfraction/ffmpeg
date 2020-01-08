@@ -3,7 +3,7 @@
 AutoReqProv: no
 
 # Macros; Why isn't detected buildroot macro?
-%global _topdir $HOME/rpmbuild
+%global _topdir $PWD/rpmbuild
 %global _sourcedir %{_topdir}/SOURCES
 %global _buildrootdir %{_topdir}/BUILDROOT
 %global buildroot %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
