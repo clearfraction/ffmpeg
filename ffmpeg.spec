@@ -122,14 +122,14 @@ export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-reg
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 
 ./configure \
-    --prefix=%{_prefix} \
-    --bindir=%{_bindir}/%{name} \
-    --datadir=%{_datadir}/%{name} \
-    --docdir=%{_docdir}/%{name} \
-    --incdir=%{_includedir}/%{name} \
-    --libdir=%{_libdir}/%{name} \
-    --mandir=%{_mandir} \
-    --pkgconfigdir=%{_datadir}/pkgconfig \
+    --prefix=/usr \
+    --bindir=/usr/bin/ffmpeg \
+    --datadir=/usr/share/ffmpeg \
+    --docdir=/usr/share/doc/ffmpeg \
+    --incdir=/usr/include/ffmpeg \
+    --libdir=/usr/lib64/ffmpeg \
+    --mandir=/usr/share/man \
+    --pkgconfigdir=/usr/share/pkgconfig \
     --arch=%{_target_cpu} \
     --extra-ldflags='-ldl' \
     --enable-vaapi \
@@ -169,7 +169,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-gpl \
     --disable-debug \
     --disable-stripping \
-    --shlibdir=%{_libdir} \
+    --shlibdir=/usr/lib64/ffmpeg \
     --enable-libfdk-aac --enable-nonfree 
 
 #   --optflags="%%{optflags}" \
