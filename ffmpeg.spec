@@ -201,8 +201,9 @@ fi
 make install DESTDIR="%{buildroot}" V=0
 rm -rf %{buildroot}/usr/share/ffmpeg/examples
 
-#pushd %{buildroot}/usr/bin/
-#install -c -m 755 ffmpeg ffplay ffprobe "%{buildroot}/usr/bin/ffmpeg-freeworld"
+pushd %{buildroot}/usr/bin/
+mv -f ff* "%{buildroot}/usr/bin/ffmpeg-freeworld/"
+popd
 
 
 %post libs -p /sbin/ldconfig
