@@ -1,7 +1,4 @@
 %define abi_package %{nil}
-# We need test and avoid conflicts in bundle packages in CL
-AutoReqProv: no
-
 %global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
@@ -9,10 +6,10 @@ AutoReqProv: no
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        7
+Release:        7%{?dist}
 License:        GPLv2+
 URL:            http://ffmpeg.org/
-Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:	    https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -56,12 +53,6 @@ BuildRequires:	alsa-lib-dev
 BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 
-# Requires
-Requires: x264-libs >= 0.157
-Requires: x265-libs >= 3.2.1
-Requires: libmp3lame0 >= 3.100
-Requires: ffmpeg-libs = %{version}-%{release}
-Requires: libavdevice = %{version}-%{release}
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -71,7 +62,7 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 
 %package        libs
 Summary:        Libraries for %{name}
-Recommends:	fdk-aac-free >= 2.0.0
+Recommends:	fdk-aac-free
 
 %description    libs
 FFmpeg is a complete and free Internet live audio and video
@@ -122,14 +113,13 @@ export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-reg
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 
 ./configure \
-    --prefix=/usr \
-    --bindir=/usr/bin/ffmpeg-freeworld \
-    --datadir=/usr/share/ffmpeg \
-    --docdir=/usr/share/doc/ffmpeg \
-    --incdir=/usr/include/ffmpeg \
-    --libdir=/usr/lib64/ffmpeg \
-    --mandir=/usr/share/man \
-    --pkgconfigdir=/usr/share/pkgconfig \
+    --prefix=%{_prefix} \
+    --bindir=%{_bindir} \
+    --datadir=%{_datadir}/%{name} \
+    --docdir=%{_docdir}/%{name} \
+    --incdir=%{_includedir}/%{name} \
+    --libdir=%{_libdir} \
+    --mandir=%{_mandir} \
     --arch=%{_target_cpu} \
     --extra-ldflags='-ldl' \
     --enable-vaapi \
@@ -169,7 +159,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-gpl \
     --disable-debug \
     --disable-stripping \
-    --shlibdir=/usr/lib64/ffmpeg \
+    --shlibdir=%{_libdir} \
     --enable-libfdk-aac --enable-nonfree 
 
 #   --optflags="%%{optflags}" \
@@ -178,33 +168,13 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 
 
 
-make V=0
+%make_build V=0
 make documentation V=0
 make alltools V=0
 
 %install
-
-export SOURCE_DATE_EPOCH=1571938166
-rm -rf %{buildroot}
-
-# Install profile and ld.so.config files
-mkdir -p %{buildroot}/etc/profile.d/
-mkdir -p %{buildroot}/etc/ld.so.conf.d/
-echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "%{buildroot}/etc/profile.d/ffmpeg.sh"
-echo '/usr/lib64/ffmpeg/' > "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
-
-if [ ! -f %{buildroot}/etc/profile.d/ffmpeg.sh ]; then
-echo "macro buildroot missed, current path $PWD"
-exit 1
-fi
-
-make install DESTDIR="%{buildroot}" V=0
-rm -rf %{buildroot}/usr/share/ffmpeg/examples
-
-pushd %{buildroot}/usr/bin/
-cp -f ff* "%{buildroot}/usr/bin/ffmpeg-freeworld/"
-rm -f *
-popd
+%make_install V=0
+rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 
 %post libs -p /sbin/ldconfig
@@ -217,34 +187,32 @@ popd
 
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING.* CREDITS README.md 
-/usr/bin/ffmpeg/ffmpeg
-/usr/bin/ffmpeg/ffplay
-/usr/bin/ffmpeg/ffprobe
-/usr/share/ffmpeg/
-/usr/share/man/
-#/etc/profile.d/ffmpeg.sh
+%{_bindir}/ffmpeg
+%{_bindir}/ffplay
+%{_bindir}/ffprobe
+%{_datadir}/%{name}
+%{_mandir}/man3/*.3*
+%{_mandir}/man1/ffmpeg*.1*
+%{_mandir}/man1/ffplay*.1*
+%{_mandir}/man1/ffprobe*.1*
 
 %files libs
-%defattr(-,root,root,-)
-/usr/lib64/ffmpeg/lib*.so.*
-%exclude /usr/lib64/ffmpeg/libavdevice.so.*
-#/etc/ld.so.conf.d/ffmpeg.conf
+%{_libdir}/lib*.so.*
+%exclude %{_libdir}/libavdevice.so.*
+%exclude %{_mandir}/man3/libavdevice.3*
 
 %files -n libavdevice
-%defattr(-,root,root,-)
-/usr/lib64/ffmpeg/libavdevice.so.*
-/usr/share/man/man3/libavdevice.3*
+%{_libdir}/libavdevice.so.*
+%{_mandir}/man3/libavdevice.3*
 
 %files dev
-%defattr(-,root,root,-)
 %doc MAINTAINERS doc/APIchanges doc/*.txt
 %doc _doc/examples
-%doc %{_docdir}/ffmpeg/*.html
-/usr/include/ffmpeg/
-/usr/share/pkgconfig/lib*.pc
-/usr/lib64/ffmpeg/lib*.so
+%doc %{_docdir}/%{name}/*.html
+%{_includedir}/%{name}
+%{_libdir}/pkgconfig/lib*.pc
+%{_libdir}/lib*.so
 
 
 
