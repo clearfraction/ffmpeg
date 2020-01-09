@@ -123,7 +123,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 
 ./configure \
     --prefix=/usr \
-    --bindir=/usr/bin/ffmpeg/ \
+    --bindir=/usr/bin/ffmpeg-freeworld \
     --datadir=/usr/share/ffmpeg \
     --docdir=/usr/share/doc/ffmpeg \
     --incdir=/usr/include/ffmpeg \
@@ -218,10 +218,7 @@ rm -rf %{buildroot}/usr/share/ffmpeg/examples
 /usr/bin/ffmpeg/ffplay
 /usr/bin/ffmpeg/ffprobe
 /usr/share/ffmpeg/
-/usr/share/man/man3/*.3*
-/usr/share/man/man1/ffmpeg*.1*
-/usr/share/man/man1/ffplay*.1*
-/usr/share/man/man1/ffprobe*.1*
+/usr/share/man/
 #/etc/profile.d/ffmpeg.sh
 
 %files libs
