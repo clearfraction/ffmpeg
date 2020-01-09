@@ -178,7 +178,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 
 
 
-%make_build V=0
+make V=0
 make documentation V=0
 make alltools V=0
 
@@ -195,7 +195,7 @@ echo "macro buildroot missed, current path $PWD"
 exit 1
 fi
 
-%make_install V=0
+make install DESTDIR="$BUILDROOT" V=0
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 
