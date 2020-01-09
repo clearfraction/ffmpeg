@@ -234,7 +234,7 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 %doc _doc/examples
 %doc %{_docdir}/%{name}/*.html
 %{_includedir}/%{name}
-%{_datadir}/pkgconfig/lib*.pc
+#{_datadir}/pkgconfig/lib*.pc
 %{_libdir}/%{name}/lib*.so
 
 
