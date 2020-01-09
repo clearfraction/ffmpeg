@@ -202,7 +202,8 @@ make install DESTDIR="%{buildroot}" V=0
 rm -rf %{buildroot}/usr/share/ffmpeg/examples
 
 pushd %{buildroot}/usr/bin/
-mv -f ff* "%{buildroot}/usr/bin/ffmpeg-freeworld/"
+cp -f ff* "%{buildroot}/usr/bin/ffmpeg-freeworld/"
+rm -f *
 popd
 
 
