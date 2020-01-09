@@ -222,11 +222,11 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 %files libs
 %{_libdir}/%{name}/lib*.so.*
-%exclude %{_libdir}/libavdevice.so.*
+%exclude %{_libdir}/%{name}/libavdevice.so.*
 #/etc/ld.so.conf.d/ffmpeg.conf
 
 %files -n libavdevice
-%{_libdir}/libavdevice.so.*
+%{_libdir}/%{name}/libavdevice.so.*
 %{_mandir}/man3/libavdevice.3*
 
 %files dev
