@@ -198,8 +198,11 @@ echo "macro buildroot missed, current path $PWD"
 exit 1
 fi
 
-make install DESTDIR="$BUILDROOT" V=0
+make install DESTDIR="%{buildroot}" V=0
 rm -rf %{buildroot}/usr/share/ffmpeg/examples
+
+#pushd %{buildroot}/usr/bin/
+#install -c -m 755 ffmpeg ffplay ffprobe "%{buildroot}/usr/bin/ffmpeg-freeworld"
 
 
 %post libs -p /sbin/ldconfig
