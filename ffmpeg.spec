@@ -123,7 +123,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 
 ./configure \
     --prefix=/usr \
-    --bindir=/usr/bin/ffmpeg \
+    --bindir=/usr/bin/ffmpeg/ \
     --datadir=/usr/share/ffmpeg \
     --docdir=/usr/share/doc/ffmpeg \
     --incdir=/usr/include/ffmpeg \
@@ -184,19 +184,22 @@ make alltools V=0
 
 %install
 
-# Install profile and ld.so.config files
-mkdir -p $BUILDROOT/etc/profile.d/
-mkdir -p $BUILDROOT/etc/ld.so.conf.d/
-echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "$BUILDROOT/etc/profile.d/ffmpeg.sh"
-echo '/usr/lib64/ffmpeg/' > "$BUILDROOT/etc/ld.so.conf.d/ffmpeg.conf"
+export SOURCE_DATE_EPOCH=1571938166
+rm -rf %{buildroot}
 
-if [ ! -f $BUILDROOT/etc/profile.d/ffmpeg.sh ]; then
+# Install profile and ld.so.config files
+mkdir -p %{buildroot}/etc/profile.d/
+mkdir -p %{buildroot}/etc/ld.so.conf.d/
+echo 'export PATH=/usr/bin/ffmpeg:$PATH' > "%{buildroot}/etc/profile.d/ffmpeg.sh"
+echo '/usr/lib64/ffmpeg/' > "%{buildroot}/etc/ld.so.conf.d/ffmpeg.conf"
+
+if [ ! -f %{buildroot}/etc/profile.d/ffmpeg.sh ]; then
 echo "macro buildroot missed, current path $PWD"
 exit 1
 fi
 
 make install DESTDIR="$BUILDROOT" V=0
-rm -rf %{buildroot}%{_datadir}/%{name}/examples
+rm -rf %{buildroot}/usr/share/ffmpeg/examples
 
 
 %post libs -p /sbin/ldconfig
@@ -209,33 +212,37 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 
 %files
+%defattr(-,root,root,-)
 %doc COPYING.* CREDITS README.md 
-%{_bindir}/%{name}/ffmpeg
-%{_bindir}/%{name}/ffplay
-%{_bindir}/%{name}/ffprobe
-%{_datadir}/%{name}
-%{_mandir}/man3/*.3*
-%{_mandir}/man1/ffmpeg*.1*
-%{_mandir}/man1/ffplay*.1*
-%{_mandir}/man1/ffprobe*.1*
+/usr/bin/ffmpeg/ffmpeg
+/usr/bin/ffmpeg/ffplay
+/usr/bin/ffmpeg/ffprobe
+/usr/share/ffmpeg/
+/usr/share/man/man3/*.3*
+/usr/share/man/man1/ffmpeg*.1*
+/usr/share/man/man1/ffplay*.1*
+/usr/share/man/man1/ffprobe*.1*
 #/etc/profile.d/ffmpeg.sh
 
 %files libs
-%{_libdir}/%{name}/lib*.so.*
-%exclude %{_libdir}/%{name}/libavdevice.so.*
+%defattr(-,root,root,-)
+/usr/lib64/ffmpeg/lib*.so.*
+%exclude /usr/lib64/ffmpeg/libavdevice.so.*
 #/etc/ld.so.conf.d/ffmpeg.conf
 
 %files -n libavdevice
-%{_libdir}/%{name}/libavdevice.so.*
-%{_mandir}/man3/libavdevice.3*
+%defattr(-,root,root,-)
+/usr/lib64/ffmpeg/libavdevice.so.*
+/usr/share/man/man3/libavdevice.3*
 
 %files dev
+%defattr(-,root,root,-)
 %doc MAINTAINERS doc/APIchanges doc/*.txt
 %doc _doc/examples
-%doc %{_docdir}/%{name}/*.html
-%{_includedir}/%{name}
-#{_datadir}/pkgconfig/lib*.pc
-%{_libdir}/%{name}/lib*.so
+%doc %{_docdir}/ffmpeg/*.html
+/usr/include/ffmpeg/
+/usr/share/pkgconfig/lib*.pc
+/usr/lib64/ffmpeg/lib*.so
 
 
 
