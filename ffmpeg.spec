@@ -6,10 +6,11 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        7%{?dist}
+Release:        8%{?dist}
 License:        GPLv2+
 URL:            http://ffmpeg.org/
-Source0:	    https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source1:        ffmpeg.appdata.xml
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -52,7 +53,7 @@ BuildRequires:	libdrm-dev
 BuildRequires:	alsa-lib-dev
 BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
-
+BuildRequires:  appstream-glib-dev
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -176,6 +177,12 @@ make alltools V=0
 %make_install V=0
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
+# Appdata
+mkdir -p %{buildroot}/%{_datadir}/{applications,metainfo}
+install -Dm 0644 %{SOURCE1} %{buildroot}/usr/share/metainfo/%{name}.appdata.xml
+
+%check
+appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.xml
 
 %post libs -p /sbin/ldconfig
 
@@ -196,6 +203,7 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 %{_mandir}/man1/ffmpeg*.1*
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
+%{_datadir}/metainfo/%{name}.appdata.xml
 
 %files libs
 %{_libdir}/lib*.so.*

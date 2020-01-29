@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2020 URPMs <unitedrpms@protonmail.com> -->
+<component type="console-application">
+  <id>ffmpeg</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0</project_license>
+  <name>FFmpeg</name>
+  <summary>Transcode various media</summary>
+  <description>
+    <p>FFmpeg is a complete and free Internet live audio and video
+    broadcasting solution for Linux/Unix. It also includes a digital
+    VCR. It can encode in real time in many formats including MPEG1 audio
+    and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.</p>
+  </description>
+  <provides>
+    <binary>ffmpeg</binary>
+  </provides>
+  <url type="homepage">https://ffmpeg.org/</url>
+  <update_contact>https://lists.ffmpeg.org/mailman/listinfo/ffmpeg-user/</update_contact>
+</component>

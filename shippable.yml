@@ -1,0 +1,21 @@
+# Build Environment
+
+language: python
+
+python:
+  - 3.0
+
+install: true
+
+# the build scripts
+script:
+-  docker run --privileged=true --cap-add=SYS_ADMIN --security-opt seccomp:unconfined -v $(pwd):/home clearlinux:latest /bin/sh -c "swupd bundle-add curl && rm -f test_build.sh && curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/test_build.sh && chmod +x test_build.sh && ./test_build.sh -n ffmpeg"   
+
+
+notifications:
+slack: unitedrpms:lzDykHTpajKrgmGz9NkrO1Hj
+
+
+
+
+
