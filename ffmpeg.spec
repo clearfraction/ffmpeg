@@ -184,13 +184,13 @@ install -Dm 0644 %{SOURCE1} %{buildroot}/usr/share/metainfo/%{name}.appdata.xml
 %check
 appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.xml
 
-%post libs -p /sbin/ldconfig
+%post libs -p /usr/bin/ldconfig
 
-%postun libs -p /sbin/ldconfig
+%postun libs -p /usr/bin/ldconfig
 
-%post -n libavdevice -p /sbin/ldconfig
+%post -n libavdevice -p /usr/bin/ldconfig
 
-%postun -n libavdevice -p /sbin/ldconfig
+%postun -n libavdevice -p /usr/bin/ldconfig
 
 
 %files
