@@ -54,6 +54,7 @@ BuildRequires:	alsa-lib-dev
 BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  appstream-glib-dev
+BuildRequires:  libdav1d-dev
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -161,7 +162,8 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --disable-debug \
     --disable-stripping \
     --shlibdir=%{_libdir} \
-    --enable-libfdk-aac --enable-nonfree 
+    --enable-libfdk-aac --enable-nonfree \
+    --enable-libdav1d
 
 #   --optflags="%%{optflags}" \
 #   --cpu=%{_target_cpu} \
