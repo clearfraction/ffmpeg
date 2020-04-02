@@ -210,7 +210,6 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 %files libs
 %{_libdir}/lib*.so.*
 %exclude %{_libdir}/libavdevice.so.*
-%exclude %{_mandir}/man3/libavdevice.3*
 
 %files -n libavdevice
 %{_libdir}/libavdevice.so.*
