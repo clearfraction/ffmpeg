@@ -1,18 +1,16 @@
 %define abi_package %{nil}
-%global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
+%global commit0 8e12af29d1a3f95c9e952d78354e3c8b1c0431a8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
-Summary:        Digital VCR and streaming server
-Name:           ffmpeg
-Version:        4.2.2
-Release:        9%{?dist}
-License:        GPLv2+
-URL:            http://ffmpeg.org/
+Summary:      Digital VCR and streaming server
+Name:            ffmpeg
+Version:         4.3
+Release:         1%{?dist}
+License:         GPLv2+
+URL:               http://ffmpeg.org/
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1:        ffmpeg.appdata.xml
-# forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
-#Patch0:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
@@ -49,12 +47,16 @@ BuildRequires:  wavpack-dev
 BuildRequires:  x264-dev
 BuildRequires:  x265-dev
 BuildRequires:  zlib-dev
-BuildRequires:	libdrm-dev
-BuildRequires:	alsa-lib-dev
+BuildRequires:  libdrm-dev
+BuildRequires:  alsa-lib-dev
 BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  appstream-glib-dev
 BuildRequires:  libdav1d-dev
+BuildRequires:  Vulkan-Loader-dev
+BuildRequires:  Vulkan-Headers-dev
+BuildRequires:  glslang-dev
+BuildRequires:  lensfun-dev
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -99,6 +101,9 @@ This package contains development files for %{name}
 
 # fix -O3 -g in host_cflags
 sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
+sed -i "s|-lOSDependent||" configure
+sed -i "s|-lOGLCompiler||" configure
+
 mkdir -p _doc/examples
 cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
@@ -163,7 +168,9 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --disable-stripping \
     --shlibdir=%{_libdir} \
     --enable-libfdk-aac --enable-nonfree \
-    --enable-libdav1d
+    --enable-libdav1d \
+    --enable-vulkan --enable-libglslang \
+    --enable-liblensfun
 
 #   --optflags="%%{optflags}" \
 #   --cpu=%{_target_cpu} \
