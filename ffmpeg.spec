@@ -53,9 +53,10 @@ BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  appstream-glib-dev
 BuildRequires:  libdav1d-dev
-BuildRequires:  Vulkan-Loader-dev
-BuildRequires:  Vulkan-Headers-dev
-BuildRequires:  glslang-dev
+BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
+BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
+BuildRequires:  glslang-dev glslang
+BuildRequires:  SPIRV-Tools SPIRV-Headers SPIRV-Tools-dev SPIRV-Headers-dev
 BuildRequires:  lensfun-dev
 
 %description
