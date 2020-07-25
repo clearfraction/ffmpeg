@@ -8,13 +8,13 @@ Name:            ffmpeg
 Version:         4.3
 Release:         1%{?dist}
 License:         GPLv2+
-URL:               http://ffmpeg.org/
+URL:            http://ffmpeg.org/
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1:        ffmpeg.appdata.xml
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
-BuildRequires:  fdk-aac-free-dev
+BuildRequires:  fdk-aac-dev
 BuildRequires:  fontconfig-dev
 BuildRequires:  freetype-dev
 BuildRequires:  gnutls-dev
