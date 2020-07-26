@@ -1,11 +1,11 @@
 %define abi_package %{nil}
-%global commit0 8e12af29d1a3f95c9e952d78354e3c8b1c0431a8
+%global commit0 6b6b9e593dd4d3aaf75f48d40a13ef03bdef9fdb
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:      Digital VCR and streaming server
 Name:            ffmpeg
-Version:         4.3
+Version:         4.3.1
 Release:         1%{?dist}
 License:         GPLv2+
 URL:            http://ffmpeg.org/
@@ -67,7 +67,7 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 
 %package        libs
 Summary:        Libraries for %{name}
-Recommends:	fdk-aac-free
+Recommends:	fdk-aac
 
 %description    libs
 FFmpeg is a complete and free Internet live audio and video
@@ -139,7 +139,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-gnutls \
     --enable-ladspa \
     --enable-libass \
-    --enable-libfdk-aac --enable-nonfree \
+    --enable-libfdk --enable-nonfree \
     --enable-libjack \
     --enable-libfreetype \
     --enable-libfribidi \
