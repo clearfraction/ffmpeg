@@ -139,7 +139,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-gnutls \
     --enable-ladspa \
     --enable-libass \
-    --enable-libfdk --enable-nonfree \
     --enable-libjack \
     --enable-libfreetype \
     --enable-libfribidi \
@@ -172,11 +171,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-libdav1d \
     --enable-vulkan --enable-libglslang \
     --enable-liblensfun
-
-#   --optflags="%%{optflags}" \
-#   --cpu=%{_target_cpu} \
-#   --enable-runtime-cpudetect \
-
 
 
 %make_build V=0
