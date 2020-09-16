@@ -195,7 +195,6 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 
 
 %files
-%doc COPYING.* CREDITS README.md 
 %{_bindir}/ffmpeg
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
@@ -210,7 +209,6 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 %{_libdir}/libavdevice.so.*
 
 %files dev
-%doc MAINTAINERS doc/APIchanges doc/*.txt
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
