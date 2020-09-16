@@ -105,8 +105,6 @@ sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 sed -i "s|-lOSDependent||" configure
 sed -i "s|-lOGLCompiler||" configure
 
-mkdir -p _doc/examples
-cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %build
 export LANG=C.UTF-8
@@ -174,13 +172,10 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-vulkan --enable-libglslang \
     --enable-liblensfun
 
-
-%make_build V=0
-make documentation V=0
-make alltools V=0
+make  %{?_smp_mflags}
 
 %install
-%make_install V=0
+%make_install
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 # Appdata
@@ -205,10 +200,6 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
 %{_datadir}/%{name}
-#%%{_mandir}/man3/*.3*
-#%%{_mandir}/man1/ffmpeg*.1*
-#%%{_mandir}/man1/ffplay*.1*
-#%%{_mandir}/man1/ffprobe*.1*
 %{_datadir}/metainfo/%{name}.appdata.xml
 
 %files libs
@@ -217,12 +208,9 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 
 %files -n libavdevice
 %{_libdir}/libavdevice.so.*
-#%%{_mandir}/man3/libavdevice.3*
 
 %files dev
 %doc MAINTAINERS doc/APIchanges doc/*.txt
-%doc _doc/examples
-#%%doc %{_docdir}/%%{name}/*.html
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
