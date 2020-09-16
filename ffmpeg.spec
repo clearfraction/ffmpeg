@@ -222,7 +222,7 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 %files dev
 %doc MAINTAINERS doc/APIchanges doc/*.txt
 %doc _doc/examples
-%doc %{_docdir}/%{name}/*.html
+#%%doc %{_docdir}/%%{name}/*.html
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
