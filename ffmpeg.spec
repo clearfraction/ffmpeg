@@ -120,7 +120,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --prefix=%{_prefix} \
     --bindir=%{_bindir} \
     --datadir=%{_datadir}/%{name} \
-    --disable-doc
+    --disable-doc \
     --incdir=%{_includedir}/%{name} \
     --libdir=%{_libdir} \
     --disable-error-resilience \
@@ -149,7 +149,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-libspeex \
     --enable-libvorbis \
     --enable-libv4l2 \
-    --enable-sdl2
+    --enable-sdl2 \
     --enable-indev="v4l2" \
     --enable-outdev="sdl2" \
     --enable-libvpx \
