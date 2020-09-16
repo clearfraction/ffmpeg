@@ -120,11 +120,14 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --prefix=%{_prefix} \
     --bindir=%{_bindir} \
     --datadir=%{_datadir}/%{name} \
-    --docdir=%{_docdir}/%{name} \
+    --disable-doc
+    --disable-htmlpages
     --incdir=%{_includedir}/%{name} \
     --libdir=%{_libdir} \
-    --mandir=%{_mandir} \
-    --arch=%{_target_cpu} \
+    --disable-error-resilience \
+    --enable-pic \
+    --enable-rdft \
+    --enable-pixelutils \
     --extra-ldflags='-ldl' \
     --enable-vaapi \
     --enable-bzlib \
@@ -147,12 +150,16 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --enable-libspeex \
     --enable-libvorbis \
     --enable-libv4l2 \
+    --enable-sdl2
+    --enable-indev="v4l2" \
+    --enable-outdev="sdl2" \
     --enable-libvpx \
     --enable-libwebp \
     --enable-libx264 \
     --enable-libx265 \
     --enable-avfilter \
     --enable-avresample \
+    --enable-swscale \
     --enable-postproc \
     --enable-pthreads \
     --enable-librtmp \
@@ -199,10 +206,10 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
 %{_datadir}/%{name}
-%{_mandir}/man3/*.3*
-%{_mandir}/man1/ffmpeg*.1*
-%{_mandir}/man1/ffplay*.1*
-%{_mandir}/man1/ffprobe*.1*
+#%%{_mandir}/man3/*.3*
+#%%{_mandir}/man1/ffmpeg*.1*
+#%%{_mandir}/man1/ffplay*.1*
+#%%{_mandir}/man1/ffprobe*.1*
 %{_datadir}/metainfo/%{name}.appdata.xml
 
 %files libs
