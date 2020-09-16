@@ -4,10 +4,10 @@
 %global gver .git%{shortcommit0}
 
 Summary:      Digital VCR and streaming server
-Name:            ffmpeg
-Version:         4.3.1
-Release:         1%{?dist}
-License:         GPLv2+
+Name:           ffmpeg
+Version:        4.3.1
+Release:        1%{?dist}
+License:        GPLv2+
 URL:            http://ffmpeg.org/
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Source1:        ffmpeg.appdata.xml
@@ -121,7 +121,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
     --bindir=%{_bindir} \
     --datadir=%{_datadir}/%{name} \
     --disable-doc
-    --disable-htmlpages
     --incdir=%{_includedir}/%{name} \
     --libdir=%{_libdir} \
     --disable-error-resilience \
