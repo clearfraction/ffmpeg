@@ -10,7 +10,6 @@ Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://ffmpeg.org/
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-Source1:        ffmpeg.appdata.xml
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
@@ -178,13 +177,6 @@ make  %{?_smp_mflags}
 %make_install
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
-# Appdata
-mkdir -p %{buildroot}/%{_datadir}/{applications,metainfo}
-install -Dm 0644 %{SOURCE1} %{buildroot}/usr/share/metainfo/%{name}.appdata.xml
-
-%check
-appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.xml
-
 %post libs -p /usr/bin/ldconfig
 
 %postun libs -p /usr/bin/ldconfig
@@ -199,7 +191,6 @@ appstream-util validate-relax --nonet %{buildroot}/usr/share/metainfo/*.appdata.
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
 %{_datadir}/%{name}
-%{_datadir}/metainfo/%{name}.appdata.xml
 
 %files libs
 %{_libdir}/lib*.so.*
