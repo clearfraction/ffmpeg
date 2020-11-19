@@ -10,7 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
+      - shell: bash
+        env:
+          GITLAB_API_KEY: ${{ secrets.GITLAB_API_KEY }}
       - uses: actions/checkout@v2
       - run: curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build.sh
       - run: chmod +x build.sh
-      - run: docker run --privileged --cap-add=SYS_ADMIN -e GITLAB_API_KEY=${{ secrets.GITLAB_API_KEY }} -v $(pwd):/home clearlinux:latest sh -c "cd /home && ./build.sh"
+      - run: docker run --privileged --cap-add=SYS_ADMIN -e GITLAB_API_KEY="$GITLAB_API_KEY" -v $(pwd):/home clearlinux:latest sh -c "cd /home && ./build.sh"
