@@ -1,7 +1,0 @@
-os: linux
-language: generic
-services:
-  - docker
-script:
-  - curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build.sh && chmod +x build.sh
-  - docker run --privileged --cap-add=SYS_ADMIN -e GITLAB_API_KEY=$GITLAB_API_KEY -v $(pwd):/home clearlinux:latest sh -c "cd /home && ./build.sh"
