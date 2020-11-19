@@ -104,6 +104,8 @@ sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 sed -i "s|-lOSDependent||" configure
 sed -i "s|-lOGLCompiler||" configure
 
+# fix glslang include
+sed -i "s|#include <glslang/Include/revision.h>||" libavfilter/glslang.cpp
 
 %build
 export LANG=C.UTF-8
