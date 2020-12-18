@@ -107,6 +107,9 @@ sed -i "s|-lOGLCompiler||" configure
 # fix glslang include
 sed -i "s|#include <glslang/Include/revision.h>||" libavfilter/glslang.cpp
 
+# fix bad pkgconfig
+sed -i 's|vulkan64|vulkan|g' /usr/lib64/pkgconfig/vulkan.pc
+
 %build
 export LANG=C.UTF-8
 export GCC_IGNORE_WERROR=1
