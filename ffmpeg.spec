@@ -1,11 +1,11 @@
 %define abi_package %{nil}
-%global commit0 f719f869907764e6412a6af6e178c46e5f915d25
+%global commit0 dc91b913b6260e85e1304c74ff7bb3c22a8c9fb1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.3.2
+Version:        4.4
 Release:        1%{?dist}
 License:        GPLv2+
 URL:            http://ffmpeg.org/
@@ -100,15 +100,10 @@ This package contains development files for %{name}
 %setup -n %{name}-%{shortcommit0} 
 
 # fix -O3 -g in host_cflags
-sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 sed -i "s|-lOSDependent||" configure
 sed -i "s|-lOGLCompiler||" configure
-
-# fix glslang include
-sed -i "s|#include <glslang/Include/revision.h>||" libavfilter/glslang.cpp
-
-# fix bad pkgconfig
-sed -i 's|vulkan64|vulkan|g' /usr/lib64/pkgconfig/vulkan.pc
+sed -i "s|-lMachineIndependent||" configure
+sed -i "s|-lGenericCodeGen||" configure
 
 %build
 export LANG=C.UTF-8
@@ -122,11 +117,9 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
     --prefix=%{_prefix} \
     --bindir=%{_bindir} \
     --datadir=%{_datadir}/%{name} \
-    --disable-doc \
     --incdir=%{_includedir}/%{name} \
     --libdir=%{_libdir} \
-    --disable-error-resilience \
-    --enable-pic \
+    --shlibdir=%{_libdir} \
     --enable-rdft \
     --enable-pixelutils \
     --extra-ldflags='-ldl' \
@@ -152,8 +145,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
     --enable-libvorbis \
     --enable-libv4l2 \
     --enable-sdl2 \
-    --enable-indev="v4l2" \
-    --enable-outdev="sdl2" \
     --enable-libvpx \
     --enable-libwebp \
     --enable-libx264 \
@@ -170,16 +161,20 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
     --enable-gpl \
     --disable-debug \
     --disable-stripping \
-    --shlibdir=%{_libdir} \
+    --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
-    --enable-vulkan --enable-libglslang \
-    --enable-liblensfun
+    --enable-vulkan --enable-libglslang
+    
+#--enable-liblensfun
+
+
 
 make  %{?_smp_mflags}
 
 %install
-%make_install
+rm -rf %{buildroot}
+make install DESTDIR=%{buildroot} INSTALL="install -p"
 rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 %post libs -p /usr/bin/ldconfig
@@ -199,9 +194,6 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 
 %files libs
 %{_libdir}/lib*.so.*
-%exclude %{_libdir}/libavdevice.so.*
-
-%files -n libavdevice
 %{_libdir}/libavdevice.so.*
 
 %files dev
