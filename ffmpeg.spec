@@ -75,14 +75,6 @@ VCR. It can encode in real time in many formats including MPEG1 audio
 and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 This package contains the libraries for %{name}
 
-%package     -n libavdevice
-Summary:        Special devices muxing/demuxing library
-
-%description -n libavdevice
-Libavdevice is a complementary library to libavf "libavformat". It provides
-various "special" platform-specific muxers and demuxers, e.g. for grabbing
-devices, audio capture and playback etc.
-
 %package        dev
 Summary:        Development package for %{name}
 Requires:       %{name}-libs%{_isa} = %{version}-%{release}
@@ -99,7 +91,7 @@ This package contains development files for %{name}
 %prep
 %setup -n %{name}-%{shortcommit0} 
 
-# fix -O3 -g in host_cflags
+# erase glslang flags from configure checks
 sed -i "s|-lOSDependent||" configure
 sed -i "s|-lOGLCompiler||" configure
 sed -i "s|-lMachineIndependent||" configure
@@ -160,7 +152,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
     --enable-shared \
     --enable-gpl \
     --disable-debug \
-    --disable-stripping \
     --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
@@ -180,10 +171,6 @@ rm -rf %{buildroot}%{_datadir}/%{name}/examples
 %post libs -p /usr/bin/ldconfig
 
 %postun libs -p /usr/bin/ldconfig
-
-%post -n libavdevice -p /usr/bin/ldconfig
-
-%postun -n libavdevice -p /usr/bin/ldconfig
 
 
 %files
