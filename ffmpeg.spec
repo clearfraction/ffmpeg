@@ -1,7 +1,6 @@
 %define abi_package %{nil}
 %global commit0 dc91b913b6260e85e1304c74ff7bb3c22a8c9fb1
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global gver .git%{shortcommit0}
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
@@ -10,6 +9,9 @@ Release:        100
 License:        GPLv2+
 URL:            http://ffmpeg.org/
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Patch1: CVE-2020-22015.patch
+Patch2: CVE-2020-22019.patch
+Patch3: CVE-2020-22021.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
@@ -88,7 +90,10 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 This package contains development files for %{name}
 
 %prep
-%setup -n %{name}-%{shortcommit0} 
+%setup -n %{name}-%{shortcommit0}
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 # erase glslang flags from configure checks
 sed -i "s|-lOSDependent||" configure
