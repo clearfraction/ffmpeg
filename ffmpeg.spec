@@ -53,7 +53,7 @@ BuildRequires:  alsa-lib-dev
 BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  appstream-glib-dev
-BuildRequires:  libdav1d-dev
+BuildRequires:  dav1d-dev
 BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
 BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires:  glslang-dev glslang
