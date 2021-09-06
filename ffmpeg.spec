@@ -7,7 +7,7 @@ Name:           ffmpeg
 Version:        4.4
 Release:        100
 License:        GPLv2+
-URL:            http://ffmpeg.org/
+URL:            http://ffmpeg.org
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Patch1: CVE-2020-22015.patch
 Patch2: CVE-2020-22019.patch
