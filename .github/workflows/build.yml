@@ -1,21 +1,24 @@
 name: build
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
-
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: handle env var
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: clearfraction/mass-rebuild
+          workflow: mass-rebuild.yml
+          check_artifacts: true
+      - name: Building a package
         run: |
-          curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build.sh
-          chmod +x build.sh
-          docker run --privileged --cap-add=SYS_ADMIN --security-opt apparmor:unconfined -e GITLAB_API_KEY="$GITLAB_API_KEY" -v $(pwd):/home clearlinux:latest sh -c "cd /home && ./build.sh"
-        env:
-          GITLAB_API_KEY: ${{ secrets.GITLAB_API_KEY }}
-        
+          curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build.sh && chmod +x build.sh
+          docker run --privileged --cap-add=SYS_ADMIN --security-opt apparmor:unconfined -v $(pwd):/home clearlinux:latest sh -c "cd /home && ./build.sh"
+      - name: Upload result
+        uses: actions/upload-artifact@v2
+        with:
+          path: RPMS/*.rpm
