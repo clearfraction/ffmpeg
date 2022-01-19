@@ -1,10 +1,10 @@
 %define abi_package %{nil}
-%global commit0 a66b58d61caaae452785a2d69f5de9259ab27138
+%global commit0 7e0d640edf6c3eee1816b105c2f7498c4f948e74
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        5.0
+Version:        4.4.1
 Release:        102
 License:        GPLv2+
 URL:            http://ffmpeg.org
