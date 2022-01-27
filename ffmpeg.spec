@@ -56,7 +56,7 @@ BuildRequires:  Vulkan-Loader-dev Vulkan-Loader
 BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires:  glslang-dev glslang
 BuildRequires:  SPIRV-Tools SPIRV-Headers SPIRV-Tools-dev SPIRV-Headers-dev
-# BuildRequires:  lensfun-dev
+BuildRequires:  SVT-AV1-dev
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -165,7 +165,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
     --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
-    --enable-vulkan --enable-libglslang
+    --enable-vulkan --enable-libglslang --enable-libsvtav1
 make  %{?_smp_mflags}
 
 unset PKG_CONFIG_PATH
@@ -224,7 +224,7 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
     --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
-    --enable-vulkan --enable-libglslang
+    --enable-vulkan --enable-libglslang --enable-libsvtav1
 make  %{?_smp_mflags}
 popd
 
