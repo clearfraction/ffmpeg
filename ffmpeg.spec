@@ -247,14 +247,12 @@ rm -rf %{buildroot}/usr/share/examples
 %{_bindir}/ffmpeg
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
-/usr/share/clear/optimized-elf/bin*
 %{_datadir}/%{name}
 
 %files libs
 %defattr(-,root,root,-)
 %{_libdir}/lib*.so.*
 %{_libdir}/libavdevice.so.*
-/usr/share/clear/optimized-elf/lib*
 
 %files dev
 %defattr(-,root,root,-)
@@ -265,6 +263,8 @@ rm -rf %{buildroot}/usr/share/examples
 %files filemap
 %defattr(-,root,root,-)
 /usr/share/clear/filemap/filemap-ffmpeg
+/usr/share/clear/optimized-elf/bin*
+/usr/share/clear/optimized-elf/lib*
 
 
 %changelog
