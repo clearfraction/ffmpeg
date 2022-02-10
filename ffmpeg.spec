@@ -55,7 +55,7 @@ BuildRequires:  dav1d-dev
 BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
 BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires:  glslang-dev glslang
-BuildRequires:  SPIRV-Tools SPIRV-Headers SPIRV-Tools-dev SPIRV-Headers-dev
+BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev
 BuildRequires:  SVT-AV1-dev
 
 %description
