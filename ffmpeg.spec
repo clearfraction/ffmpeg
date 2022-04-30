@@ -1,11 +1,11 @@
 %define abi_package %{nil}
-%global commit0 390d6853d0ef408007feb39c0040682c81c02751
+%global commit0 9687cae2b468e09e35df4cea92cc2e6a0e6c93b3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        5.0
-Release:        102
+Version:        5.0.1
+Release:        103
 License:        GPLv2+
 URL:            http://ffmpeg.org
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
