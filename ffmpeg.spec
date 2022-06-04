@@ -87,14 +87,6 @@ VCR. It can encode in real time in many formats including MPEG1 audio
 and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 This package contains development files for %{name}
 
-
-%package filemap
-Summary: filemap components for the ffmpeg package.
-Group: Default
-
-%description filemap
-filemap components for the ffmpeg package.
-
 %prep
 %setup -n %{name}-%{shortcommit0}
 # erase glslang flags from configure checks
@@ -102,20 +94,18 @@ sed -i "s|-lOSDependent||" configure
 sed -i "s|-lOGLCompiler||" configure
 sed -i "s|-lMachineIndependent||" configure
 sed -i "s|-lGenericCodeGen||" configure
-# AVX2 build
-pushd ..
-cp -a %{name}-%{shortcommit0} buildavx2
-popd
 
 
 %build
 export LANG=C.UTF-8
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
-
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256  "
+export FCFLAGS="$CFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256  "
+export FFLAGS="$CFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256  "
+export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-interposition -fstack-protector-strong -fzero-call-used-regs=used -mno-vzeroupper -mprefer-vector-width=256  "
 ./configure --disable-static --extra-ldflags='-ldl' \
     --prefix=%{_prefix} \
     --bindir=%{_bindir} \
@@ -167,76 +157,13 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-re
     --enable-libdav1d \
     --enable-vulkan --enable-libglslang --enable-libsvtav1
 make  %{?_smp_mflags}
-
-unset PKG_CONFIG_PATH
-pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3"
-export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
-export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
-./configure --disable-static --extra-ldflags='-ldl' \
-    --prefix=%{_prefix} \
-    --bindir=%{_bindir} \
-    --datadir=%{_datadir}/%{name} \
-    --incdir=%{_includedir}/%{name} \
-    --libdir=%{_libdir} \
-    --shlibdir=%{_libdir} \
-    --enable-rdft \
-    --enable-pixelutils \
-    --extra-ldflags='-ldl' \
-    --enable-vaapi \
-    --enable-bzlib \
-    --enable-libdrm \
-    --enable-fontconfig \
-    --enable-gcrypt \
-    --enable-gmp --enable-version3 \
-    --enable-gnutls \
-    --enable-ladspa \
-    --enable-libass \
-    --enable-libjack \
-    --enable-libfreetype \
-    --enable-libfribidi \
-    --enable-libgsm \
-    --enable-libmp3lame \
-    --enable-opengl \
-    --enable-libopus \
-    --enable-libpulse \
-    --enable-libsnappy \
-    --enable-libspeex \
-    --enable-libvorbis \
-    --enable-libv4l2 \
-    --enable-sdl2 \
-    --enable-libvpx \
-    --enable-libwebp \
-    --enable-libx264 \
-    --enable-libx265 \
-    --enable-avfilter \
-    --enable-swscale \
-    --enable-postproc \
-    --enable-pthreads \
-    --enable-librtmp \
-    --enable-libmfx \
-    --disable-static \
-    --enable-shared \
-    --enable-gpl \
-    --disable-debug \
-    --disable-doc \
-    --enable-libfdk-aac --enable-nonfree \
-    --enable-libdav1d \
-    --enable-vulkan --enable-libglslang --enable-libsvtav1
-make  %{?_smp_mflags}
-popd
 
 
 %install
 rm -rf %{buildroot}
-pushd ../buildavx2/
-%make_install_v3
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
-popd
-rm -rf %{buildroot}/usr/share/examples
 %make_install
+rm -rf %{buildroot}/usr/share/examples
+
 
 %post libs -p /usr/bin/ldconfig
 
@@ -259,12 +186,6 @@ rm -rf %{buildroot}/usr/share/examples
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
-
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-ffmpeg
-/usr/share/clear/optimized-elf/bin*
-/usr/share/clear/optimized-elf/lib*
 
 
 %changelog
