@@ -10,7 +10,7 @@ License:        GPLv2+
 URL:            http://ffmpeg.org
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 Requires:       %{name}-libs = %{version}-%{release}
-Requires:       %{name}-filemap = %{version}-%{release}
+#Requires:       %%{name}-filemap = %%{version}-%%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
 BuildRequires:  fdk-aac-dev
