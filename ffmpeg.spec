@@ -1,6 +1,6 @@
 %define abi_package %{nil}
-%global gitdate 20220815
-%global commit0 8479e2fc8bdfc80ed7f376594c3833c01d970030
+%global gitdate 20220821
+%global commit0 6ee1996721710a6b15d5664446964d7b835ff3a6
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
