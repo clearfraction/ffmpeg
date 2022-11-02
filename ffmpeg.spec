@@ -1,12 +1,11 @@
-%define abi_package %{nil}
-%global gitdate 20221014
-%global commit0 f5455889fd2a879e1bfeecb7e81c2fd52ebd4baa
+%global gitdate 20221101
+%global commit0 12733c0cbd49077d3aac48007f674f14d1e15ccd
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        5.1.2
-Release:        109
+Release:        %{gitdate}
 License:        GPLv2+
 URL:            http://ffmpeg.org
 Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
@@ -58,6 +57,8 @@ BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires:  glslang-dev glslang
 BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev
 BuildRequires:  SVT-AV1-dev
+BuildRequires:  libplacebo-dev
+
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -157,7 +158,9 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
-    --enable-vulkan --enable-libglslang --enable-libsvtav1
+    --enable-vulkan --enable-libglslang \
+    --enable-libsvtav1 \
+    --enable-libplacebo
 make  %{?_smp_mflags}
 
 
