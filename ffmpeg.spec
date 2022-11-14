@@ -1,5 +1,5 @@
-%global gitdate 20221101
-%global commit0 12733c0cbd49077d3aac48007f674f14d1e15ccd
+%global gitdate 20221114
+%global commit0 3ab11dc5bb6eec9b645da45fe28b1b2c29e92eed
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
