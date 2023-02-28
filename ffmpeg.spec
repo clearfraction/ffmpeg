@@ -1,10 +1,10 @@
-%global gitdate 20230101
-%global commit0 62da0b4a741a064f118a0eece496d6bcc437ec91
+%global gitdate 20230226
+%global commit0 ea3d24bbe3c58b171e55fe2151fc7ffaca3ab3d2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        5.1.2
+Version:        6.0
 Release:        %{gitdate}
 License:        GPLv2+
 URL:            http://ffmpeg.org
