@@ -58,6 +58,19 @@ BuildRequires:  glslang-dev glslang
 BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev
 BuildRequires:  SVT-AV1-dev
 BuildRequires:  libplacebo-dev
+BuildRequires:  zimg-dev
+BuildRequires:  xvidcore-dev
+BuildRequires:  vid.stab-dev
+BuildRequires:  libtheora-dev
+BuildRequires:  libssh-dev libssh2-dev
+BuildRequires:  srt-dev
+BuildRequires:  speex-dev
+BuildRequires:  librsvg-dev
+BuildRequires:  libopenmpt-dev
+BuildRequires:  openjpeg-dev
+BuildRequires:  libaom-dev
+BuildRequires:  ladspa_sdk-dev
+
 
 
 %description
@@ -116,6 +129,7 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --incdir=%{_includedir}/%{name} \
     --libdir=%{_libdir} \
     --shlibdir=%{_libdir} \
+    --enable-lto \
     --enable-rdft \
     --enable-pixelutils \
     --extra-ldflags='-ldl' \
@@ -126,7 +140,6 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-gcrypt \
     --enable-gmp --enable-version3 \
     --enable-gnutls \
-    --enable-ladspa \
     --enable-libass \
     --enable-libjack \
     --enable-libfreetype \
@@ -160,7 +173,24 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libdav1d \
     --enable-vulkan --enable-libglslang \
     --enable-libsvtav1 \
-    --enable-libplacebo
+    --enable-libplacebo \
+    --enable-ladspa \
+    --enable-libaom \
+    --enable-libopenjpeg \
+    --enable-libopenmpt \
+    --enable-librsvg \
+    --enable-libspeex \
+    --enable-libsrt \
+    --enable-libssh \
+    --enable-libtheora \
+    --enable-libvidstab \
+    --enable-libxcb \
+    --enable-libzimg 
+    
+    
+    
+    
+    
 make  %{?_smp_mflags}
 
 
