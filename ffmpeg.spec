@@ -129,7 +129,6 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --incdir=%{_includedir}/%{name} \
     --libdir=%{_libdir} \
     --shlibdir=%{_libdir} \
-    --enable-lto \
     --enable-rdft \
     --enable-pixelutils \
     --extra-ldflags='-ldl' \
