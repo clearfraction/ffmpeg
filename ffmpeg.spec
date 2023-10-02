@@ -57,7 +57,7 @@ BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires:  glslang-dev glslang
 BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev
 BuildRequires:  SVT-AV1-dev
-BuildRequires:  libplacebo-dev
+# BuildRequires:  libplacebo-dev
 BuildRequires:  zimg-dev
 BuildRequires:  xvidcore-dev
 BuildRequires:  vid.stab-dev
@@ -172,7 +172,6 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libdav1d \
     --enable-vulkan --enable-libglslang \
     --enable-libsvtav1 \
-    --enable-libplacebo \
     --enable-ladspa \
     --enable-libaom \
     --enable-libopenjpeg \
@@ -187,6 +186,7 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libzimg 
     
     
+    #    --enable-libplacebo \
     
     
     
