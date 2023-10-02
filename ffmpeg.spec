@@ -1,4 +1,4 @@
-%global gitdate 20230925
+%global gitdate 20231003
 %global commit0 067ed535f47373927e8bc2ff8eec2c18014197e5
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
