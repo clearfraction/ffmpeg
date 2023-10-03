@@ -8,7 +8,7 @@ Version:        6.0
 Release:        %{gitdate}
 License:        GPLv2+
 URL:            http://ffmpeg.org
-Source0:        https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:        https://ffmpeg.org/releases/ffmpeg-%{version}.tar.xz
 Requires:       %{name}-libs = %{version}-%{release}
 #Requires:       %%{name}-filemap = %%{version}-%%{release}
 BuildRequires:  gmp-dev
@@ -57,7 +57,7 @@ BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
 BuildRequires:  glslang-dev glslang
 BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev
 BuildRequires:  SVT-AV1-dev
-# BuildRequires:  libplacebo-dev
+BuildRequires:  libplacebo-dev
 BuildRequires:  zimg-dev
 BuildRequires:  xvidcore-dev
 BuildRequires:  vid.stab-dev
@@ -71,7 +71,9 @@ BuildRequires:  openjpeg-dev
 BuildRequires:  libaom-dev
 BuildRequires:  ladspa_sdk-dev
 
-
+Patch1: https://src.fedoraproject.org/rpms/ffmpeg/raw/rawhide/f/0001-avcodec-x86-mathops-clip-constants-used-with-shift-i.patch
+Patch2: https://src.fedoraproject.org/rpms/ffmpeg/raw/rawhide/f/0001-avfilter-vf_libplacebo-remove-deprecated-field.patch
+Patch3: https://src.fedoraproject.org/rpms/ffmpeg/raw/rawhide/f/0001-avfilter-vf_libplacebo-wrap-deprecated-opts-in-FF_AP.patch
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -103,7 +105,10 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 This package contains development files for %{name}
 
 %prep
-%setup -n %{name}-%{shortcommit0}
+%setup -n %{name}-%{version}
+%patch -P 1 -p1
+#%patch -P 2 -p1
+%patch -P 3 -p1
 # erase glslang flags from configure checks
 sed -i "s|-lOSDependent||" configure
 sed -i "s|-lOGLCompiler||" configure
@@ -183,13 +188,7 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libtheora \
     --enable-libvidstab \
     --enable-libxcb \
-    --enable-libzimg 
-    
-    
-    #    --enable-libplacebo \
-    
-    
-    
+    --enable-libzimg
 make  %{?_smp_mflags}
 
 
