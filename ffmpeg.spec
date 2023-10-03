@@ -1,5 +1,5 @@
 %global gitdate 20231003
-%global commit0 067ed535f47373927e8bc2ff8eec2c18014197e5
+%global commit0 ea3d24bbe3c58b171e55fe2151fc7ffaca3ab3d2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Summary:        Digital VCR and streaming server
