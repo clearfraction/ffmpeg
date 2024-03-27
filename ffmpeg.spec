@@ -182,7 +182,7 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libtheora \
     --enable-libvidstab \
     --enable-libxcb \
-    --enable-libzimg
+    --enable-libzimg --enable-libplacebo
 make  %{?_smp_mflags}
 
 
