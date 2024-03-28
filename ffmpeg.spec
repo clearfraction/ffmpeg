@@ -69,9 +69,8 @@ BuildRequires:  libopenmpt-dev
 BuildRequires:  openjpeg-dev
 BuildRequires:  libaom-dev
 BuildRequires:  ladspa_sdk-dev
+BuildRequires:  glslang-dev glslang
 BuildRequires:  shaderc-dev
-
-#BuildRequires:  glslang-dev glslang
 
 
 %description
@@ -173,7 +172,6 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
-    --enable-vulkan \
     --enable-libsvtav1 \
     --enable-ladspa \
     --enable-libaom \
@@ -187,9 +185,11 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libvidstab \
     --enable-libxcb \
     --enable-libzimg \
-    --enable-libplacebo --enable-libshaderc
+    --enable-libplacebo 
 
+    # --enable-vulkan
     # --enable-libglslang
+    # --enable-libshaderc
     
 make  %{?_smp_mflags}
 
