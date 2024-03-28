@@ -9,12 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Download artifact
+      - name: Download artifact - lame
         uses: dawidd6/action-download-artifact@v2
         with:
-          repo: clearfraction/mass-rebuild
-          workflow: mass-rebuild.yml
+          repo: clearfraction/lame
+          workflow: build.yml
           check_artifacts: true
+      - name: Download artifact - fdk-aac
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: clearfraction/fdk-aac
+          workflow: build.yml
+          check_artifacts: true
+      - name: Download artifact - x264
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: clearfraction/x264
+          workflow: build.yml
+          check_artifacts: true
+      - name: Download artifact - x265
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          repo: clearfraction/x265
+          workflow: build.yml
+          check_artifacts: true          
       - name: Building a package
         run: |
           curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build.sh && chmod +x build.sh
