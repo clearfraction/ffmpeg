@@ -104,10 +104,15 @@ This package contains development files for %{name}
 %prep
 %setup -n %{name}-%{version}
 # erase glslang flags from configure checks
-sed -i "s|-lOSDependent||" configure
-sed -i "s|-lOGLCompiler||" configure
-sed -i "s|-lMachineIndependent||" configure
-sed -i "s|-lGenericCodeGen||" configure
+sed -i "s|-lOSDependent||g" configure
+sed -i "s|-lOGLCompiler||g" configure
+sed -i "s|-lMachineIndependent||g" configure
+sed -i "s|-lGenericCodeGen||g" configure
+sed -i "s|-lSPIRV-Tools-opt||g" configure
+sed -i "s|-lSPIRV-Tools||g" configure
+sed -i "s|-lSPIRV||g" configure
+
+
 
 
 %build
