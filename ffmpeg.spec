@@ -54,7 +54,6 @@ BuildRequires:  appstream-glib-dev
 BuildRequires:  dav1d-dev
 BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
 BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
-BuildRequires:  glslang-dev glslang
 BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev SPIRV-Headers-dev
 BuildRequires:  SVT-AV1-dev
 BuildRequires:  libplacebo-dev
@@ -71,6 +70,8 @@ BuildRequires:  openjpeg-dev
 BuildRequires:  libaom-dev
 BuildRequires:  ladspa_sdk-dev
 BuildRequires:  shaderc-dev
+
+#BuildRequires:  glslang-dev glslang
 
 
 %description
@@ -172,7 +173,7 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --disable-doc \
     --enable-libfdk-aac --enable-nonfree \
     --enable-libdav1d \
-    --enable-vulkan --enable-libglslang \
+    --enable-vulkan \
     --enable-libsvtav1 \
     --enable-ladspa \
     --enable-libaom \
@@ -187,6 +188,8 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libxcb \
     --enable-libzimg \
     --enable-libplacebo --enable-libshaderc
+
+    # --enable-libglslang
     
 make  %{?_smp_mflags}
 
