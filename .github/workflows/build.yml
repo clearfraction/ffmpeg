@@ -13,25 +13,25 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           repo: clearfraction/lame
-          workflow: build.yml
+          workflow: build-core.yml
           check_artifacts: true
       - name: Download artifact - fdk-aac
         uses: dawidd6/action-download-artifact@v2
         with:
           repo: clearfraction/fdk-aac
-          workflow: build.yml
+          workflow: build-core.yml
           check_artifacts: true
       - name: Download artifact - x264
         uses: dawidd6/action-download-artifact@v2
         with:
           repo: clearfraction/x264
-          workflow: build.yml
+          workflow: build-core.yml
           check_artifacts: true
       - name: Download artifact - x265
         uses: dawidd6/action-download-artifact@v2
         with:
           repo: clearfraction/x265
-          workflow: build.yml
+          workflow: build-core.yml
           check_artifacts: true          
       - name: Building a package
         run: |
