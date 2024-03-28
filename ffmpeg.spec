@@ -70,6 +70,7 @@ BuildRequires:  libopenmpt-dev
 BuildRequires:  openjpeg-dev
 BuildRequires:  libaom-dev
 BuildRequires:  ladspa_sdk-dev
+BuildRequires:  shaderc-dev
 
 
 %description
@@ -108,9 +109,7 @@ sed -i "s|-lOSDependent||g" configure
 sed -i "s|-lOGLCompiler||g" configure
 sed -i "s|-lMachineIndependent||g" configure
 sed -i "s|-lGenericCodeGen||g" configure
-sed -i "s|-lSPIRV-Tools-opt||g" configure
-sed -i "s|-lSPIRV-Tools||g" configure
-sed -i "s|-lSPIRV||g" configure
+
 
 
 
@@ -186,7 +185,9 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libtheora \
     --enable-libvidstab \
     --enable-libxcb \
-    --enable-libzimg 
+    --enable-libzimg \
+    --enable-libplacebo --enable-libshaderc
+    
 make  %{?_smp_mflags}
 
 # --enable-libplacebo
