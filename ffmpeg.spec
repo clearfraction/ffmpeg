@@ -52,11 +52,11 @@ BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  appstream-glib-dev
 BuildRequires:  dav1d-dev
-BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
-BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
-BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev SPIRV-Headers-dev
+# BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
+# BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
+# BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev SPIRV-Headers-dev
+# BuildRequires:  libplacebo-dev
 BuildRequires:  SVT-AV1-dev
-BuildRequires:  libplacebo-dev
 BuildRequires:  zimg-dev
 BuildRequires:  xvidcore-dev
 BuildRequires:  vid.stab-dev
@@ -184,16 +184,15 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libtheora \
     --enable-libvidstab \
     --enable-libxcb \
-    --enable-libzimg \
-    --enable-libplacebo 
-
+    --enable-libzimg
+    
+    # --enable-libplacebo 
     # --enable-vulkan
     # --enable-libglslang
     # --enable-libshaderc
     
 make  %{?_smp_mflags}
 
-# --enable-libplacebo
 %install
 rm -rf %{buildroot}
 %make_install
