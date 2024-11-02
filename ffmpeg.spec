@@ -189,7 +189,7 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libplacebo \
     --enable-vulkan \
     --enable-libglslang \
-    --enable-libshaderc \ 
+    --enable-libshaderc \
     --enable-vapoursynth
     
 make  %{?_smp_mflags}
