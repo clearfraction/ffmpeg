@@ -8,27 +8,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
       - name: Download artifact - lame
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@master
         with:
           repo: clearfraction/lame
           workflow: build-core.yml
           check_artifacts: true
       - name: Download artifact - fdk-aac
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@master
         with:
           repo: clearfraction/fdk-aac
           workflow: build-core.yml
           check_artifacts: true
       - name: Download artifact - x264
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@master
         with:
           repo: clearfraction/x264
           workflow: build-core.yml
           check_artifacts: true
       - name: Download artifact - x265
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@master
         with:
           repo: clearfraction/x265
           workflow: build-core.yml
@@ -38,6 +38,6 @@ jobs:
           curl -LO https://raw.githubusercontent.com/clearfraction/tools/master/build.sh && chmod +x build.sh
           docker run --privileged --cap-add=SYS_ADMIN --security-opt apparmor:unconfined -v $(pwd):/home clearlinux:latest sh -c "cd /home && ./build.sh"
       - name: Upload result
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@master
         with:
           path: RPMS/*.rpm
