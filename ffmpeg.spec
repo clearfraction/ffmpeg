@@ -4,13 +4,12 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        7.0.1
+Version:        7.1
 Release:        %{gitdate}
 License:        GPLv2+
 URL:            http://ffmpeg.org
 Source0:        https://ffmpeg.org/releases/ffmpeg-%{version}.tar.xz
 Requires:       %{name}-libs = %{version}-%{release}
-#Requires:       %%{name}-filemap = %%{version}-%%{release}
 BuildRequires:  gmp-dev
 BuildRequires:  bzip2-dev
 BuildRequires:  fdk-aac-dev
@@ -52,10 +51,10 @@ BuildRequires:  rtmpdump-dev
 BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  appstream-glib-dev
 BuildRequires:  dav1d-dev
-# BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
-# BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
-# BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev SPIRV-Headers-dev
-# BuildRequires:  libplacebo-dev
+BuildRequires:  Vulkan-Loader-dev Vulkan-Loader 
+BuildRequires:  Vulkan-Headers-dev Vulkan-Tools Vulkan-Headers
+BuildRequires:  SPIRV-Tools-dev SPIRV-Cross-dev SPIRV-Headers-dev
+BuildRequires:  libplacebo-dev
 BuildRequires:  SVT-AV1-dev
 BuildRequires:  zimg-dev
 BuildRequires:  xvidcore-dev
@@ -71,6 +70,8 @@ BuildRequires:  libaom-dev
 BuildRequires:  ladspa_sdk-dev
 BuildRequires:  glslang-dev glslang
 BuildRequires:  shaderc-dev
+BuildRequires : pkgconfig(vapoursynth)
+BuildRequires : pkgconfig(vapoursynth-script)
 
 
 %description
@@ -184,12 +185,12 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libtheora \
     --enable-libvidstab \
     --enable-libxcb \
-    --enable-libzimg
-    
-    # --enable-libplacebo 
-    # --enable-vulkan
-    # --enable-libglslang
-    # --enable-libshaderc
+    --enable-libzimg \
+    --enable-libplacebo \
+    --enable-vulkan \
+    --enable-libglslang \
+    --enable-libshaderc \ 
+    --enable-vapoursynth
     
 make  %{?_smp_mflags}
 
