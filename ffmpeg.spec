@@ -69,7 +69,6 @@ BuildRequires:  openjpeg-dev
 BuildRequires:  libaom-dev
 BuildRequires:  ladspa_sdk-dev
 BuildRequires:  glslang-dev glslang
-BuildRequires:  shaderc-dev
 BuildRequires : pkgconfig(vapoursynth)
 BuildRequires : pkgconfig(vapoursynth-script)
 
@@ -189,7 +188,6 @@ export CXXFLAGS="$CXXFLAGS -Ofast -fno-lto -falign-functions=32 -fno-semantic-in
     --enable-libplacebo \
     --enable-vulkan \
     --enable-libglslang \
-    --enable-libshaderc \
     --enable-vapoursynth
     
 make  %{?_smp_mflags}
